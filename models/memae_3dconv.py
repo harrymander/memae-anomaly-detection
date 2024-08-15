@@ -1,8 +1,9 @@
 from __future__ import absolute_import, print_function
-import torch
+
 from torch import nn
 
 from models import MemModule
+
 
 class AutoEncoderCov3DMem(nn.Module):
     def __init__(self, chnum_in, mem_dim, shrink_thres=0.0025):

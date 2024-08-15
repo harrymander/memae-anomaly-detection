@@ -1,10 +1,12 @@
 from __future__ import absolute_import, print_function
+
+import math
+
 import torch
 from torch import nn
-import math
-from torch.nn.parameter import Parameter
 from torch.nn import functional as F
-import numpy as np
+from torch.nn.parameter import Parameter
+
 
 #
 class MemoryUnit(nn.Module):

@@ -1,8 +1,11 @@
 from __future__ import absolute_import, print_function
+
 import os
+import random
+
 import numpy as np
 import torch
-import random
+
 
 def mkdir(path):
     """create a single empty directory if it didn't exist

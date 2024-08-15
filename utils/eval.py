@@ -1,10 +1,13 @@
 from __future__ import absolute_import, print_function
+
 import os
-import scipy.io as sio
-import numpy as np
-import sklearn.metrics as skmetr
-import utils
+
 import matplotlib.pyplot as plt
+import numpy as np
+import scipy.io as sio
+import sklearn.metrics as skmetr
+
+import utils
 
 
 def eval_video(data_path, res_path, is_show=False):

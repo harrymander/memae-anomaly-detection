@@ -1,11 +1,14 @@
-from __future__ import print_function, absolute_import
-import torch
-from torch.utils.data import Dataset
-import os, os.path
-import scipy.io as sio
-from skimage import io
-from torchvision import transforms
+from __future__ import absolute_import, print_function
+
+import os
+import os.path
+
 import numpy as np
+import scipy.io as sio
+import torch
+from skimage import io
+from torch.utils.data import Dataset
+from torchvision import transforms
 
 
 # Video index files are organized in correlated sub folders.

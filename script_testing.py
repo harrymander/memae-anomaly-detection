@@ -1,16 +1,17 @@
 from __future__ import absolute_import, print_function
+
 import os
-import utils
-import torch
-from torchvision import transforms
-from torch.utils.data import DataLoader
+
 import numpy as np
-import data
 import scipy.io as sio
-from options.testing_options import TestOptions
+import torch
+from torch.utils.data import DataLoader
+from torchvision import transforms
+
+import data
 import utils
-import time
 from models import AutoEncoderCov3D, AutoEncoderCov3DMem
+from options.testing_options import TestOptions
 
 ###
 opt_parser = TestOptions()

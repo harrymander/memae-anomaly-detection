@@ -1,17 +1,14 @@
 import os
-import utils
+
 import torch
 import torch.nn as nn
-from torchvision import transforms
 from torch.utils.data import DataLoader
-import numpy as np
+from torchvision import transforms
+
 import data
-import scipy.io as sio
-from options.training_options import TrainOptions
 import utils
-import time
-from models import AutoEncoderCov3D, AutoEncoderCov3DMem
-from models import EntropyLossEncap
+from models import AutoEncoderCov3DMem, EntropyLossEncap
+from options.training_options import TrainOptions
 
 ###
 opt_parser = TrainOptions()

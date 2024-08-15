@@ -1,7 +1,8 @@
 # baseline AE models for video data
 from __future__ import absolute_import, print_function
-import torch
+
 from torch import nn
+
 
 class AutoEncoderCov3D(nn.Module):
     def __init__(self, chnum_in):
