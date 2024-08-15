@@ -54,12 +54,6 @@ saving_root = opt.ModelRoot
 saving_model_path = os.path.join(saving_root, 'model_' + model_setting + '/')
 utils.mkdir(saving_model_path)
 
-### tblog
-if(opt.IsTbLog):
-    log_path = os.path.join(saving_root, 'log_'+model_setting + '/')
-    utils.mkdir(log_path)
-    tb_logger = utils.Logger(log_path)
-
 ##
 if(chnum_in_==1):
     norm_mean = [0.5]
@@ -122,30 +116,7 @@ for epoch_idx in range(0, max_epoch_num):
             loss.backward()
             tr_optimizer.step()
             ##
-        ## TB log val
-        if(opt.IsTbLog):
-            tb_info = {
-                'loss': loss_val,
-                'recon_loss': recon_loss_val,
-                'entropy_loss': entropy_loss_val
-            }
-            for tag, value in tb_info.items():
-                tb_logger.scalar_summary(tag, value, global_ite_idx)
-            # TB log img
-            if( (global_ite_idx % tb_img_log_interval)==0 ):
-                frames_vis = utils.vframes2imgs(unorm_trans(frames.data), step=5, batch_idx=0)
-                frames_vis = np.concatenate(frames_vis, axis=-1)
-                frames_vis = frames_vis[None, :, :] * np.ones(3, dtype=int)[:, None, None]
-                frames_recon_vis = utils.vframes2imgs(unorm_trans(recon_frames.data), step=5, batch_idx=0)
-                frames_recon_vis = np.concatenate(frames_recon_vis, axis=-1)
-                frames_recon_vis = frames_recon_vis[None, :, :] * np.ones(3, dtype=int)[:, None, None]
-                tb_info = {
-                    'x': frames_vis,
-                    'x_rec': frames_recon_vis
-                }
-                for tag, imgs in tb_info.items():
-                    tb_logger.image_summary(tag, imgs, global_ite_idx)
-        ##
+
         if((batch_idx % textlog_interval)==0):
             print('[%s, epoch %d/%d, bt %d/%d] loss=%f, rc_losss=%f, ent_loss=%f' % (model_setting, epoch_idx, max_epoch_num, batch_idx, data_loader_len, loss_val, recon_loss_val, entropy_loss_val) )
         if((global_ite_idx % snap_save_interval)==0):

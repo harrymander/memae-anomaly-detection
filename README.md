@@ -13,7 +13,6 @@ In IEEE International Conference on Computer Vision (ICCV), 2019.
 + Python 3.6
 + PyTorch 0.4.1 (tested with 0.4.1)
 + torchvision 0.2.1 (tested with 0.2.1)
-+ (optional) Tensorflow 1.3.0 (only for logging with tensorboard)
 + MATLAB (for data preparation)
 
 ## Usage
