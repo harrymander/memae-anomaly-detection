@@ -1,4 +1,5 @@
 import os
+from collections.abc import Sequence
 
 import numpy as np
 import scipy.io as sio
@@ -44,6 +45,7 @@ te_res_path = te_res_root + "/" + "res_" + model_setting
 utils.mkdir(te_res_path)
 
 # loading trained model
+model: torch.nn.Module
 if opt.ModelName == "AE":
     model = AutoEncoderCov3D(chnum_in_)
 elif opt.ModelName == "MemAE":
@@ -51,14 +53,15 @@ elif opt.ModelName == "MemAE":
         chnum_in_, mem_dim_in, shrink_thres=sparse_shrink_thres
     )
 else:
-    model = []
-    print("Wrong Name.")
+    raise ValueError(f"Wrong model name: {opt.ModelName}")
 
 model_para = torch.load(model_path)
 model.load_state_dict(model_para)
 model.to(device)
 model.eval()
 
+norm_mean: Sequence[float]
+norm_std: Sequence[float]
 if chnum_in_ == 1:
     norm_mean = [0.5]
     norm_std = [0.5]

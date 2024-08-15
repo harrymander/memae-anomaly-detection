@@ -1,4 +1,5 @@
 import os
+from collections.abc import Sequence
 
 import torch
 import torch.nn as nn
@@ -56,6 +57,8 @@ saving_root = opt.ModelRoot
 saving_model_path = os.path.join(saving_root, "model_" + model_setting + "/")
 utils.mkdir(saving_model_path)
 
+norm_mean: Sequence[float]
+norm_std: Sequence[float]
 if chnum_in_ == 1:
     norm_mean = [0.5]
     norm_std = [0.5]
@@ -80,13 +83,12 @@ tr_data_loader = DataLoader(
 )
 
 # model
-if opt.ModelName == "MemAE":
-    model = AutoEncoderCov3DMem(
-        chnum_in_, mem_dim_in, shrink_thres=sparse_shrink_thres
-    )
-else:
-    model = []
-    print("Wrong model name.")
+if opt.ModelName != "MemAE":
+    raise ValueError(f"Wrong model name: {opt.ModelName}")
+
+model = AutoEncoderCov3DMem(
+    chnum_in_, mem_dim_in, shrink_thres=sparse_shrink_thres
+)
 model.apply(utils.weights_init)
 
 device = torch.device("cuda" if use_cuda else "cpu")
