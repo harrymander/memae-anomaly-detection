@@ -1,6 +1,6 @@
 from torch import nn
 
-from models import MemModule
+from .memory_module import MemModule
 
 
 class AutoEncoderCov3DMem(nn.Module):
